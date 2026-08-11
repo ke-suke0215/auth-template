@@ -23,7 +23,7 @@ GOOGLE_CLIENT_SECRET=
 
 Google Cloud Console で OAuth クライアントを作成し、承認済みのリダイレクト URI に次を登録します。
 
-```
+```text
 http://localhost:5173/api/auth/callback/google
 ```
 

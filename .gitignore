@@ -8,3 +8,4 @@ dist/
 !.dev.vars.example
 *.tsbuildinfo
 coverage/
+.DS_Store

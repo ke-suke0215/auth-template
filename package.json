@@ -1,0 +1,41 @@
+{
+  "name": "auth-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --pretty false",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "auth:generate": "npx auth@1.6.26 generate --config scripts/better-auth.config.ts --output migrations/0001_better_auth.sql --yes",
+    "db:migrate:local": "wrangler d1 migrations apply auth-template --local"
+  },
+  "dependencies": {
+    "better-auth": "1.6.26",
+    "hono": "^4.11.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.7.0",
+    "@cloudflare/vitest-pool-workers": "^0.8.0",
+    "@cloudflare/workers-types": "^5.20260804.1",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "better-sqlite3": "^12.11.1",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0",
+    "wrangler": "^4.20.0"
+  }
+}

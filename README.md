@@ -2,35 +2,61 @@
 
 Cloudflare Workers、D1、Hono、Better Auth、React を使う個人開発向け認証基盤です。v1 は Google ログインのみを提供します。
 
-## ローカル開発
+## ローカル起動
 
-Node.js 22.13 以上を用意してから、依存パッケージをインストールします。
+### 前提
+
+- Node.js 22.13 以上
+- Google ログインを確認する場合は Google Cloud の OAuth クライアント
+
+### 初回セットアップ
+
+プロジェクトのルートディレクトリで実行します。
 
 ```sh
 npm install
+cp .dev.vars.example .dev.vars
 ```
 
-`.dev.vars.example` を `.dev.vars` にコピーし、以下を設定します。`.dev.vars` は Git 管理されません。
+`.dev.vars` を編集し、以下の値を設定します。`.dev.vars` は Git 管理されません。
 
 ```dotenv
-BETTER_AUTH_SECRET=
+BETTER_AUTH_SECRET=32文字以上のランダムな文字列
 BETTER_AUTH_URL=http://localhost:5173
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=Google OAuth クライアントID
+GOOGLE_CLIENT_SECRET=Google OAuth クライアントシークレット
 ```
 
-`BETTER_AUTH_SECRET` には 32 文字以上の高エントロピーな値を設定してください。生成には `npx auth@1.6.26 secret` を使えます。
+`BETTER_AUTH_SECRET` は、次のコマンドで生成できます。
 
-Google Cloud Console で OAuth クライアントを作成し、承認済みのリダイレクト URI に次を登録します。
+```sh
+npx auth@1.6.26 secret
+```
+
+Google Cloud Console で OAuth クライアントを作成する場合は、承認済みのリダイレクト URI に次を登録します。
 
 ```text
 http://localhost:5173/api/auth/callback/google
 ```
 
-認証テーブルをローカル D1 に適用して、開発サーバーを起動します。
+### 起動
+
+認証テーブルをローカル D1 に適用してから、開発サーバーを起動します。
 
 ```sh
 npm run db:migrate:local
+npm run dev
+```
+
+ブラウザで [http://localhost:5173/](http://localhost:5173/) を開きます。
+
+開発サーバーを停止するには、起動中のターミナルで `Ctrl+C` を押します。
+
+### 2回目以降の起動
+
+依存パッケージと `.dev.vars` の設定が済んでいれば、次のコマンドだけで起動できます。
+
+```sh
 npm run dev
 ```
 

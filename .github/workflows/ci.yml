@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   verify:
-    name: Code quality, typecheck, test, and build (Node.js ${{ matrix.node-version }})
+    name: ${{ matrix.task }} (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
@@ -24,6 +24,11 @@ jobs:
         node-version:
           - 24.0.0
           - 24.19.0
+        task:
+          - check
+          - typecheck
+          - test
+          - build
 
     steps:
       - name: Check out repository
@@ -38,14 +43,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint and format check
-        run: npm run check
-
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build
-        run: npm run build
+      - name: Run ${{ matrix.task }}
+        run: npm run ${{ matrix.task }}

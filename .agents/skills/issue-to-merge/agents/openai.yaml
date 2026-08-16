@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub課題からマージまで"
+  short_description: "GitHub課題対応・レビュー・修正・マージを自動化"
+  default_prompt: "$issue-to-merge を使って、指定された GitHub の Issue を実装し、PR を作成し、サブエージェントレビューと CI を通過させてマージしてください。"

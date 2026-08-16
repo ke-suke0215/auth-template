@@ -44,7 +44,10 @@ export function LoginPage() {
 
   return (
     <AppShell>
-      <section className="w-full max-w-md border-y border-[#E7E5E4] bg-[#FFFFFF] px-6 py-8 sm:px-8 sm:py-10" aria-labelledby="login-title">
+      <section
+        className="w-full max-w-md border-y border-[#E7E5E4] bg-[#FFFFFF] px-6 py-8 sm:px-8 sm:py-10"
+        aria-labelledby="login-title"
+      >
         <p className="text-xs font-semibold tracking-[0.16em] text-[#57534E]">AUTH TEMPLATE</p>
         <h1 id="login-title" className="mt-5 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">
           ログイン
@@ -60,7 +63,12 @@ export function LoginPage() {
           {isSigningIn ? "Google へ移動しています…" : "Google でログイン"}
         </button>
         {error ? (
-          <p id="login-error" className="mt-5 border-l-2 border-[#111111] pl-3 text-sm leading-6" role="alert" aria-live="assertive">
+          <p
+            id="login-error"
+            className="mt-5 border-l-2 border-[#111111] pl-3 text-sm leading-6"
+            role="alert"
+            aria-live="assertive"
+          >
             {error}
           </p>
         ) : null}

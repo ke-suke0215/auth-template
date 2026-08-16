@@ -4,9 +4,16 @@ Cloudflare Workers、D1、Hono、Better Auth、React を使う個人開発向け
 
 ## ローカル起動
 
+### Node.jsサポート方針
+
+- 最低対応バージョン: Node.js 24.0.0
+- 推奨バージョン: Node.js 24.19.0（`.nvmrc` に記載）
+
+Node.js 24.0.0以上をサポート対象とし、CIでは最低対応バージョンと推奨バージョンの両方でtypecheck・test・buildを検証します。
+
 ### 前提
 
-- Node.js 22.13 以上
+- Node.js 24.0.0 以上
 - Google ログインを確認する場合は Google Cloud の OAuth クライアント
 
 ### 初回セットアップ

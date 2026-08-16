@@ -9,7 +9,7 @@ Cloudflare Workers、D1、Hono、Better Auth、React を使う個人開発向け
 - 最低対応バージョン: Node.js 24.0.0
 - 推奨バージョン: Node.js 24.19.0（`.nvmrc` に記載）
 
-Node.js 24.0.0以上をサポート対象とし、CIでは最低対応バージョンと推奨バージョンの両方でtypecheck・test・buildを検証します。
+Node.js 24.0.0以上をサポート対象とし、CIではNode.js 24.19.0でtypecheck・test・build・依存関係の脆弱性監査を検証します。
 
 ### 前提
 
@@ -83,6 +83,14 @@ Better Auth の CLI による `migrate` は使いません。migration の適用
 npm run typecheck
 npm test
 npm run build
+npm run audit
+npm run audit:runtime
 ```
 
 テストでは、D1 migration をテスト用 D1 に適用し、`GET /api/me` の未認証時の 401 と有効セッション時の 200 を確認します。Google OAuth の実フローは Google Cloud のクライアント情報が必要なため手動確認です。
+
+### 依存関係の脆弱性監査
+
+CIではruntime依存とdev依存を含むすべての依存関係を `npm run audit` で監査します。`high` または `critical` の脆弱性が1件以上ある場合はCIを失敗させます。dev依存もCI runnerやビルドで実行されるため、判定対象から除外しません。
+
+本番実行依存だけを確認する場合は `npm run audit:runtime` を使用します。更新で解消できない脆弱性を例外扱いにする場合は、Advisory ID、理由、期限、代替策を開発ドキュメントに記録します。

@@ -1,5 +1,5 @@
-import { makeSignature } from "better-auth/crypto";
 import { env, SELF } from "cloudflare:test";
+import { makeSignature } from "better-auth/crypto";
 import { describe, expect, it } from "vitest";
 
 const now = new Date().toISOString();
@@ -20,25 +20,21 @@ describe("GET /api/me", () => {
     const sessionToken = "session-token-for-api-me-test";
 
     await env.DB.batch([
-      env.DB
-        .prepare(
-          'insert into "user" ("id", "name", "email", "emailVerified", "image", "createdAt", "updatedAt") values (?, ?, ?, ?, ?, ?, ?)',
-        )
-        .bind(user.id, "Test User", user.email, 1, null, now, now),
-      env.DB
-        .prepare(
-          'insert into "session" ("id", "expiresAt", "token", "createdAt", "updatedAt", "ipAddress", "userAgent", "userId") values (?, ?, ?, ?, ?, ?, ?, ?)',
-        )
-        .bind(
-          "session_test_123",
-          new Date(Date.now() + 60 * 60 * 1000).toISOString(),
-          sessionToken,
-          now,
-          now,
-          null,
-          null,
-          user.id,
-        ),
+      env.DB.prepare(
+        'insert into "user" ("id", "name", "email", "emailVerified", "image", "createdAt", "updatedAt") values (?, ?, ?, ?, ?, ?, ?)',
+      ).bind(user.id, "Test User", user.email, 1, null, now, now),
+      env.DB.prepare(
+        'insert into "session" ("id", "expiresAt", "token", "createdAt", "updatedAt", "ipAddress", "userAgent", "userId") values (?, ?, ?, ?, ?, ?, ?, ?)',
+      ).bind(
+        "session_test_123",
+        new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+        sessionToken,
+        now,
+        now,
+        null,
+        null,
+        user.id,
+      ),
     ]);
 
     const signature = await makeSignature(sessionToken, env.BETTER_AUTH_SECRET);

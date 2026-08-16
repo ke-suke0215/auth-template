@@ -9,7 +9,7 @@ Cloudflare Workers、D1、Hono、Better Auth、React を使う個人開発向け
 - 最低対応バージョン: Node.js 24.0.0
 - 推奨バージョン: Node.js 24.19.0（`.nvmrc` に記載）
 
-Node.js 24.0.0以上をサポート対象とし、CIでは最低対応バージョンと推奨バージョンの両方でtypecheck・test・build・依存関係の脆弱性監査を検証します。
+Node.js 24.0.0以上をサポート対象とし、CIではNode.js 24.19.0でtypecheck・test・build・依存関係の脆弱性監査を検証します。
 
 ### 前提
 

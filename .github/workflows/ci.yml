@@ -44,4 +44,9 @@ jobs:
         run: npm ci
 
       - name: Run ${{ matrix.task }}
+        if: matrix.task != 'audit'
         run: npm run ${{ matrix.task }}
+
+      - name: Run dependency audit
+        if: matrix.task == 'audit'
+        run: npm audit --audit-level=high

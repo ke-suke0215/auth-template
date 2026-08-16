@@ -89,6 +89,15 @@ npm run audit:runtime
 
 テストでは、D1 migration をテスト用 D1 に適用し、`GET /api/me` の未認証時の 401 と有効セッション時の 200 を確認します。Google OAuth の実フローは Google Cloud のクライアント情報が必要なため手動確認です。
 
+ブラウザE2Eスモークテストは、ローカルWorker/D1環境を起動して次の画面経路を確認します。
+
+```sh
+npx playwright install chromium
+npm run e2e
+```
+
+E2Eでは`/login`の表示、未認証時の`/`から`/login`への遷移、未知の画面URLでの404画面を確認します。Google OAuthの外部通信は行わず、失敗時は`playwright-report/`または`test-results/`に診断情報を保存します。
+
 ### 依存関係の脆弱性監査
 
 CIではruntime依存とdev依存を含むすべての依存関係を `npm run audit` で監査します。`high` または `critical` の脆弱性が1件以上ある場合はCIを失敗させます。dev依存もCI runnerやビルドで実行されるため、判定対象から除外しません。

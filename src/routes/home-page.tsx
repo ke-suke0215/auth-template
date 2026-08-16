@@ -106,7 +106,12 @@ export function HomePage() {
           {isSigningOut ? "ログアウトしています…" : "ログアウト"}
         </button>
         {error ? (
-          <p id="home-error" className="mt-5 border-l-2 border-[#111111] pl-3 text-sm leading-6" role="alert" aria-live="assertive">
+          <p
+            id="home-error"
+            className="mt-5 border-l-2 border-[#111111] pl-3 text-sm leading-6"
+            role="alert"
+            aria-live="assertive"
+          >
             {error}
           </p>
         ) : null}

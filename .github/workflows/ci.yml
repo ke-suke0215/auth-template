@@ -28,6 +28,7 @@ jobs:
           - typecheck
           - test
           - build
+          - audit
 
     steps:
       - name: Check out repository
